@@ -1,0 +1,7 @@
+{
+	"name": "Menu",
+	"slug": "menu",
+	"version": "1.0",
+	"description": "This is the description for the Menu module.",
+	"enabled": true
+}
