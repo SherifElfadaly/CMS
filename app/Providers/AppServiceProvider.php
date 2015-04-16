@@ -70,9 +70,11 @@ class AppServiceProvider extends ServiceProvider {
 						'icon'     => 'fa-tags',
 					],
 					'Sections' => [
-						'All Sections' => ['url' => url('/content/sections/'), 'icon'       => 'fa-eye'],
-						'Add Section'  => ['url' => url('/content/sections/create'), 'icon' => 'fa-plus-circle'],
-						'icon'         => 'fa-bars',
+						'All Sections Types' => ['url' => url('/content/sectiontypes/'), 'icon'       => 'fa-eye'],
+						'Add Section Types'  => ['url' => url('/content/sectiontypes/create'), 'icon' => 'fa-plus-circle'],
+						'All Sections'       => ['url' => url('/content/sections/'), 'icon'           => 'fa-eye'],
+						'Add Section'        => ['url' => url('/content/sections/create'), 'icon'     => 'fa-plus-circle'],
+						'icon'               => 'fa-bars',
 					],
 				];
 			}
@@ -80,8 +82,7 @@ class AppServiceProvider extends ServiceProvider {
 			{
 				$sidebar[] = [
 					'Galleries'  => [
-						'All Galleries' => ['url' => url('/gallery/'), 'icon'             => 'fa-eye'],
-						'Media Library' => ['url' => url('/gallery/medialibrary'), 'icon' => 'fa-plus-circle'],
+						'All Galleries' => ['url' => url('/gallery/'), 'icon' => 'fa-eye'],
 						'icon'          => 'fa fa-camera',
 					],
 					'Albums'     => [
