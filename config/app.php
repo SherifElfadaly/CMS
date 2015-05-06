@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => env('APP_DEBUG'),
+	'debug' => env('APP_DEBUG',false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -201,8 +201,10 @@ return [
 		'LanguageRepository'     => 'App\Modules\Language\Facades\LanguageRepository',
 		'ContentRepository'      => 'App\Modules\Content\Facades\ContentRepository',
 		'GalleryRepository'      => 'App\Modules\Gallery\Facades\GalleryRepository',
+		'CommentRepository'      => 'App\Modules\Comment\Facades\CommentRepository',
 		'Socialize'              => 'Laravel\Socialite\Facades\Socialite',
 		'Image'                  => 'Intervention\Image\Facades\Image',
+
 	],
 
 ];

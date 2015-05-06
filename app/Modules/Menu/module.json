@@ -1,9 +1,0 @@
-{
-	"name": "Menu",
-	"slug": "menu",
-	"version": "1.0",
-	"description": "This is the description for the Menu module.",
-    "repo_link": "https:\/\/github.com\/SherifElfadaly\/MarvelMenu.git",
-    "type": "plugin",
-	"enabled": true
-}

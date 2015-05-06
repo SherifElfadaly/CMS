@@ -16,6 +16,7 @@ class Kernel extends HttpKernel {
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
 		'App\Http\Middleware\VerifyCsrfToken',
+		'App\Http\Middleware\Initialize',
 	];
 
 	/**
@@ -24,10 +25,11 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $routeMiddleware = [
-		'auth'            => 'App\Http\Middleware\Authenticate',
-		'auth.basic'      => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest'           => 'App\Http\Middleware\RedirectIfAuthenticated',
-		'AclAuthenticate' => 'App\Modules\Acl\Http\Middleware\AclAuthenticate'
+		'auth'                 => 'App\Http\Middleware\Authenticate',
+		'auth.basic'           => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
+		'guest'                => 'App\Http\Middleware\RedirectIfAuthenticated',
+		'AclAuthenticate'      => 'App\Modules\Acl\Http\Middleware\AclAuthenticate',
+		'AclAdminAuthenticate' => 'App\Modules\Acl\Http\Middleware\AclAdminAuthenticate'
 	];
 
 }

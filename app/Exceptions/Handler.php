@@ -41,9 +41,40 @@ class Handler extends ExceptionHandler {
 		$message = false;
 		if ($e->getMessage() == "Unauthorized") 
 		{
-			$message = 'You don\'t have permissions';
+			$message = 'You don\'t have permissions.';
+			return response()->view('errors.error', compact('message'));
 		}
-		return response()->view('errors.error', compact('message'));
+		elseif($e instanceof \PDOException)
+		{
+			unlink(base_path('.env'));
+			$errors = [
+				'message' => [
+				'Error connecting to DataBase please check your DataBase configs.'
+				]
+			];
+			return redirect(url('Installation/setup'))->withErrors($errors);
+		}
+		elseif($e instanceof \ErrorException)
+		{
+			if(strpos($e->getMessage(), 'Permission denied') && strpos($e->getMessage(), '.env'))
+			{
+				$errors = [
+					'.env File Permission' => [
+					'You need write permissions at the root folder to create the .env file for database conifg.'
+					]
+				];
+				return \Redirect::back()->withInput()->withErrors($errors);
+			}
+		}
+		elseif($e instanceof \Illuminate\Session\TokenMismatchException) 
+		{ 
+			$errors = [
+				'_token' => [
+				'Please refresh the page'
+				]
+			];
+			return \Redirect::back()->withInput(\Input::except('_token'))->withErrors($errors);
+		}
 	}
 
 }

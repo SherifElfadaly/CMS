@@ -18,4 +18,3 @@ Route::get('/', function(){
 Route::get('/admin', ['middleware' => 'AclAuthenticate', function(){
     return view('home');
 }]);
-
