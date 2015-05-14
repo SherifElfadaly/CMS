@@ -18,12 +18,12 @@ class Initialize {
 			return response('Storage folder need write permissions.');
 		}
 		if ( ! file_exists(base_path('.env')) || 
-		   (\InstallationRepository::scanModules() === true &&  \AclRepository::checkForAdmins() == 0))
+		   (\CMS::coreModules()->scanModules() === true &&  \CMS::groups()->adminCount() == 0))
 		{ 
-			if ($request->path() !== 'Installation/setup' && 
-				$request->path() !== 'Installation/setup/saveadmin')
+			if ($request->path() !== 'admin/Installation/setup' && 
+				$request->path() !== 'admin/Installation/setup/saveadmin')
 			{
-				redirect(url('Installation/setup'))->send();
+				redirect(url('admin/Installation/setup'))->send();
 			}
 		}
 		else
@@ -36,13 +36,13 @@ class Initialize {
 				{
 					$sidebar[] = [
 					'Users'       =>[
-						'All Users' => ['url' => url('/Acl/users'), 'icon'        => 'fa-eye'],
-						'Add User'  => ['url' => url('/Acl/users/create'), 'icon' => 'fa-plus-circle'],
+						'All Users' => ['url' => url('admin/Acl/users'), 'icon'        => 'fa-eye'],
+						'Add User'  => ['url' => url('admin/Acl/users/create'), 'icon' => 'fa-plus-circle'],
 						'icon'      => 'fa-user',
 					],
 					'Groups'      => [
-						'All Groups' => ['url' => url('/Acl/groups'), 'icon'        => 'fa-eye'],
-						'Add Group'  => ['url' => url('/Acl/groups/create'), 'icon' => 'fa-plus-circle'],
+						'All Groups' => ['url' => url('admin/Acl/groups'), 'icon'        => 'fa-eye'],
+						'Add Group'  => ['url' => url('admin/Acl/groups/create'), 'icon' => 'fa-plus-circle'],
 						'icon'       => 'fa-users',
 					],
 					/*'Permissions' =>[
@@ -56,8 +56,8 @@ class Initialize {
 				{
 					$sidebar[] = [
 					'Languages' => [
-					'All Languages' => ['url' => url('/language/'), 'icon'       => 'fa-eye'],
-					'Add Language'  => ['url' => url('/language/create'), 'icon' => 'fa-plus-circle'],
+					'All Languages' => ['url' => url('admin/language/'), 'icon'       => 'fa-eye'],
+					'Add Language'  => ['url' => url('admin/language/create'), 'icon' => 'fa-plus-circle'],
 					'icon'          => 'fa-wrench',
 					],
 					];
@@ -66,8 +66,8 @@ class Initialize {
 				{
 					$sidebar[] = [
 					'Installation' => [
-					'All Modules' => ['url' => url('/Installation'), 'icon'        => 'fa-eye'],
-					'Add Modules' => ['url' => url('/Installation/create'), 'icon' => 'fa-plus-circle'],
+					'All Modules' => ['url' => url('admin/Installation'), 'icon'        => 'fa-eye'],
+					'Add Modules' => ['url' => url('admin/Installation/create'), 'icon' => 'fa-plus-circle'],
 					'icon'        => 'fa-wrench',
 					],
 					];
@@ -76,20 +76,20 @@ class Initialize {
 				{
 					$sidebar[] = [
 					'Contents' => [
-					'All Contents' => ['url' => url('/content/'), 'icon'       => 'fa-eye'],
-					'Add Content'  => ['url' => url('/content/create'), 'icon' => 'fa-plus-circle'],
+					'All Contents' => ['url' => url('admin/content/'), 'icon'       => 'fa-eye'],
+					'Add Content'  => ['url' => url('admin/content/create'), 'icon' => 'fa-plus-circle'],
 					'icon'         => 'fa-pencil-square',
 					],
 					'Tags'     => [
-					'All Tags' => ['url' => url('/content/tags/'), 'icon'       => 'fa-eye'],
-					'Add Tag'  => ['url' => url('/content/tags/create'), 'icon' => 'fa-plus-circle'],
+					'All Tags' => ['url' => url('admin/content/tags/'), 'icon'       => 'fa-eye'],
+					'Add Tag'  => ['url' => url('admin/content/tags/create'), 'icon' => 'fa-plus-circle'],
 					'icon'     => 'fa-tags',
 					],
 					'Sections' => [
-					'All Sections Types' => ['url' => url('/content/sectiontypes/'), 'icon'       => 'fa-eye'],
-					'Add Section Types'  => ['url' => url('/content/sectiontypes/create'), 'icon' => 'fa-plus-circle'],
-					'All Sections'       => ['url' => url('/content/sections/'), 'icon'           => 'fa-eye'],
-					'Add Section'        => ['url' => url('/content/sections/create'), 'icon'     => 'fa-plus-circle'],
+					'All Sections Types' => ['url' => url('admin/content/sectiontypes/'), 'icon'       => 'fa-eye'],
+					'Add Section Types'  => ['url' => url('admin/content/sectiontypes/create'), 'icon' => 'fa-plus-circle'],
+					'All Sections'       => ['url' => url('admin/content/sections/'), 'icon'           => 'fa-eye'],
+					'Add Section'        => ['url' => url('admin/content/sections/create'), 'icon'     => 'fa-plus-circle'],
 					'icon'               => 'fa-bars',
 					],
 					];
@@ -98,12 +98,12 @@ class Initialize {
 				{
 					$sidebar[] = [
 					'Galleries'  => [
-					'All Galleries' => ['url' => url('/gallery/'), 'icon' => 'fa-eye'],
+					'All Galleries' => ['url' => url('admin/gallery/'), 'icon' => 'fa-eye'],
 					'icon'          => 'fa fa-camera',
 					],
 					'Albums'     => [
-					'All Albums' => ['url' => url('/gallery/album/'), 'icon'       => 'fa-eye'],
-					'Add Album'  => ['url' => url('/gallery/album/create'), 'icon' => 'fa-plus-circle'],
+					'All Albums' => ['url' => url('admin/gallery/album/'), 'icon'       => 'fa-eye'],
+					'Add Album'  => ['url' => url('admin/gallery/album/create'), 'icon' => 'fa-plus-circle'],
 					'icon'       => 'fa-picture-o',
 					],
 					];
@@ -112,17 +112,16 @@ class Initialize {
 				{
 					$sidebar[] = [
 					'Comments'  => [
-					'All Comments' => ['url' => url('/comment/'), 'icon' => 'fa-comments'],
+					'All Comments' => ['url' => url('admin/comment/'), 'icon' => 'fa-comments'],
 					'icon'          => 'fa fa-comments',
 					]
 					];
 				}
 			}
 
-			$categories = \ContentRepository::getSectionTree(url(\InstallationRepository::getActiveTheme()->module_key . '/category/'));
-			$languages  = \LanguageRepository::getAllLanguages();
-
-			view()->share('theme', \InstallationRepository::getActiveTheme());
+			$categories = \CMS::sections()->getSectionTree(url('category'));
+			$languages  = \CMS::languages()->all();
+			
 			view()->share('sidebar', $sidebar);
 			view()->share('categories', $categories);
 			view()->share('languages', $languages);

@@ -38,7 +38,6 @@ class Handler extends ExceptionHandler {
 	{
 		return parent::render($request, $e);
 		
-		$message = false;
 		if ($e->getMessage() == "Unauthorized") 
 		{
 			$message = 'You don\'t have permissions.';
@@ -49,22 +48,19 @@ class Handler extends ExceptionHandler {
 			unlink(base_path('.env'));
 			$errors = [
 				'message' => [
-				'Error connecting to DataBase please check your DataBase configs.'
+				'Error with the DataBase please check your DataBase configs.'
 				]
 			];
 			return redirect(url('Installation/setup'))->withErrors($errors);
 		}
-		elseif($e instanceof \ErrorException)
+		elseif($e instanceof \ErrorException && strpos($e->getMessage(), 'Permission denied') && strpos($e->getMessage(), '.env'))
 		{
-			if(strpos($e->getMessage(), 'Permission denied') && strpos($e->getMessage(), '.env'))
-			{
-				$errors = [
-					'.env File Permission' => [
-					'You need write permissions at the root folder to create the .env file for database conifg.'
-					]
-				];
-				return \Redirect::back()->withInput()->withErrors($errors);
-			}
+			$errors = [
+			'.env File Permission' => [
+			'You need write permissions at the root folder to create the .env file for database conifg.'
+			]
+			];
+			return \Redirect::back()->withInput()->withErrors($errors);
 		}
 		elseif($e instanceof \Illuminate\Session\TokenMismatchException) 
 		{ 
@@ -74,6 +70,11 @@ class Handler extends ExceptionHandler {
 				]
 			];
 			return \Redirect::back()->withInput(\Input::except('_token'))->withErrors($errors);
+		}
+		else
+		{
+			$message = 'Something went wrong.';
+			return response()->view('errors.error', compact('message'));
 		}
 	}
 

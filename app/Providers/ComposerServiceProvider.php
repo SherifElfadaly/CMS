@@ -2,7 +2,6 @@
 
 use View;
 use Illuminate\Support\ServiceProvider;
-use AclRepository;
 
 class ComposerServiceProvider extends ServiceProvider {
 
@@ -17,7 +16,7 @@ class ComposerServiceProvider extends ServiceProvider {
         {
             if (\Auth::check()) 
             {
-                $isAdmin = AclRepository::userHasGroup(\Auth::user()->id, 'admin');
+                $isAdmin = \CMS::users()->userHasGroup(\Auth::user()->id, 'admin');
                 view()->share('isAdmin', $isAdmin);
             }
         });

@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function(){
-	return redirect(InstallationRepository::getActiveTheme()->module_key);
-});
-
 Route::get('/admin', ['middleware' => 'AclAuthenticate', function(){
     return view('home');
 }]);

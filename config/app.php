@@ -196,12 +196,7 @@ return [
 		'Validator'              => 'Illuminate\Support\Facades\Validator',
 		'View'                   => 'Illuminate\Support\Facades\View',
 		'Module'                 => 'Caffeinated\Modules\Facades\Module',
-		'AclRepository'          => 'App\Modules\Acl\Facades\AclRepository',
-		'InstallationRepository' => 'App\Modules\Installation\Facades\InstallationRepository',
-		'LanguageRepository'     => 'App\Modules\Language\Facades\LanguageRepository',
-		'ContentRepository'      => 'App\Modules\Content\Facades\ContentRepository',
-		'GalleryRepository'      => 'App\Modules\Gallery\Facades\GalleryRepository',
-		'CommentRepository'      => 'App\Modules\Comment\Facades\CommentRepository',
+		'CMS'                    => 'App\Facades\CMS',
 		'Socialize'              => 'Laravel\Socialite\Facades\Socialite',
 		'Image'                  => 'Intervention\Image\Facades\Image',
 

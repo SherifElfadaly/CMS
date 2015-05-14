@@ -12,7 +12,11 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{	
-		//
+		//Bind CMS Facade to the IoC Container
+		\App::bind('CMS', function()
+		{
+			return new \App\CMS;
+		});
 	}
 
 	/**
