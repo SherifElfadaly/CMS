@@ -44,12 +44,7 @@ class Initialize {
 						'All Groups' => ['url' => url('admin/Acl/groups'), 'icon'        => 'fa-eye'],
 						'Add Group'  => ['url' => url('admin/Acl/groups/create'), 'icon' => 'fa-plus-circle'],
 						'icon'       => 'fa-users',
-					],
-					/*'Permissions' =>[
-					'All Permissions' => ['url' => url('/Acl/permissions'), 'icon'        => 'fa-eye'],
-					'Add Permission'  => ['url' => url('/Acl/permissions/create'), 'icon' => 'fa-plus-circle'],
-					'icon'            => 'fa fa-shield',
-					],*/
+					]
 					];
 				}
 				elseif ($module['slug'] == 'language') 
@@ -76,8 +71,8 @@ class Initialize {
 				{
 					$sidebar[] = [
 					'Contents' => [
-					'All Contents' => ['url' => url('admin/content/'), 'icon'       => 'fa-eye'],
-					'Add Content'  => ['url' => url('admin/content/create'), 'icon' => 'fa-plus-circle'],
+					'All Contents Types' => ['url' => url('admin/content/contenttypes/'), 'icon'       => 'fa-eye'],
+					'Add Content Type'  => ['url' => url('admin/content/contenttypes/create'), 'icon' => 'fa-plus-circle'],
 					'icon'         => 'fa-pencil-square',
 					],
 					'Tags'     => [
@@ -88,8 +83,6 @@ class Initialize {
 					'Sections' => [
 					'All Sections Types' => ['url' => url('admin/content/sectiontypes/'), 'icon'       => 'fa-eye'],
 					'Add Section Types'  => ['url' => url('admin/content/sectiontypes/create'), 'icon' => 'fa-plus-circle'],
-					'All Sections'       => ['url' => url('admin/content/sections/'), 'icon'           => 'fa-eye'],
-					'Add Section'        => ['url' => url('admin/content/sections/create'), 'icon'     => 'fa-plus-circle'],
 					'icon'               => 'fa-bars',
 					],
 					];
@@ -119,7 +112,7 @@ class Initialize {
 				}
 			}
 
-			$categories = \CMS::sections()->getSectionTree(url('category'));
+			$categories = \CMS::sections()->getSectionTree();
 			$languages  = \CMS::languages()->all();
 			
 			view()->share('sidebar', $sidebar);

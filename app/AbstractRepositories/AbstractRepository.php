@@ -9,7 +9,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * 
      * @var model
      */
-    protected $model;
+    public $model;
 
     /**
      * Create new AbstractRepository instance.

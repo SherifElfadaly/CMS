@@ -16,9 +16,8 @@ abstract class BaseController extends Controller {
 	 */
 	protected function __construct($modulePart)
 	{
-		$this->middleware('AclAuthenticate');
-		$this->modulePart = $modulePart;
-		$this->checkAdmin();
+			$this->modulePart = $modulePart;
+			$this->checkAdmin();
 	}
 
 	/**
@@ -32,7 +31,7 @@ abstract class BaseController extends Controller {
 		$adminOnly = property_exists($this, 'adminOnly') ? $this->adminOnly : false;
 		if ($adminOnly) 
 		{
-			$this->middleware('AclAdminAuthenticate');
+			$this->checkLogin(true);
 		}
 		else
 		{
@@ -50,10 +49,12 @@ abstract class BaseController extends Controller {
 		$extraPermissions = property_exists($this, 'permissions') ? $this->permissions : array();
 
 		return array_merge([
-			'Index'  => 'show', 
-			'Create' => 'add', 
-			'Edit'   => 'edit', 
-			'Delete' => 'delete'
+			'getIndex'   => 'show', 
+			'getCreate'  => 'add', 
+			'getEdit'    => 'edit', 
+			'postCreate' => 'add',
+			'postEdit'   => 'edit', 
+			'getDelete'  => 'delete'
 			], $extraPermissions);
 	}	
 
@@ -66,10 +67,36 @@ abstract class BaseController extends Controller {
 	{
 		foreach ($this->getRouteActionPermissions() as $routeAction => $permission) 
 		{
-			if (strpos(explode('@', \Route::currentRouteAction())[1], $routeAction))
+			if (explode('@', \Route::currentRouteAction())[1] === $routeAction)
 			{
+				$this->checkLogin();
 				$this->hasPermission($permission);
 			}
+		}
+	}
+
+	/**
+	 * Redirect the user to teh login page if not logged in
+	 * and if admin is true then allow admin users only.
+	 * 
+	 * @param permission
+	 */
+	private function checkLogin($admin = false)
+	{
+		if (\Auth::guest())
+		{
+			if (\Request::ajax())
+			{
+				response('Unauthorized.', 401)->send();
+			}
+			else
+			{
+				return redirect()->guest('admin/Acl/login')->send();
+			}
+		}	
+		elseif ($admin && ! \CMS::users()->userHasGroup(\Auth::user()->id, 'admin')) 
+		{
+			abort(403, 'Unauthorized');
 		}
 	}
 

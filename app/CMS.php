@@ -3,7 +3,12 @@
 use App\AbstractRepositories\AbstractRepositoryContainer;
 
 class CMS extends AbstractRepositoryContainer
-{
+{	
+	/**
+	 * Specify every module repositories name space.
+	 * 
+	 * @return array
+	 */
 	protected function getRepoNameSpace()
 	{
 		return [
