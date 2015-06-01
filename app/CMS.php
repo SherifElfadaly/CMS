@@ -5,7 +5,7 @@ use App\AbstractRepositories\AbstractRepositoryContainer;
 class CMS extends AbstractRepositoryContainer
 {	
 	/**
-	 * Specify every module repositories name space.
+	 * Specify module repositories name space.
 	 * 
 	 * @return array
 	 */
@@ -18,6 +18,9 @@ class CMS extends AbstractRepositoryContainer
 		'App\Modules\Gallery\Repositories',
 		'App\Modules\Installation\Repositories',
 		'App\Modules\Language\Repositories',
+		'App\Modules\Menus\Repositories',
+		'App\Modules\Widget\Repositories',
+		'App\Modules\Slider\Repositories',
 				];
 	}
 }

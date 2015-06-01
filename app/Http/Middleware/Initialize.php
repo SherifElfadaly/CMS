@@ -69,23 +69,29 @@ class Initialize {
 				}
 				elseif ($module['slug'] == 'content') 
 				{
-					$sidebar[] = [
-					'Contents' => [
-					'All Contents Types' => ['url' => url('admin/content/contenttypes/'), 'icon'       => 'fa-eye'],
-					'Add Content Type'  => ['url' => url('admin/content/contenttypes/create'), 'icon' => 'fa-plus-circle'],
-					'icon'         => 'fa-pencil-square',
-					],
-					'Tags'     => [
-					'All Tags' => ['url' => url('admin/content/tags/'), 'icon'       => 'fa-eye'],
-					'Add Tag'  => ['url' => url('admin/content/tags/create'), 'icon' => 'fa-plus-circle'],
-					'icon'     => 'fa-tags',
-					],
-					'Sections' => [
-					'All Sections Types' => ['url' => url('admin/content/sectiontypes/'), 'icon'       => 'fa-eye'],
-					'Add Section Types'  => ['url' => url('admin/content/sectiontypes/create'), 'icon' => 'fa-plus-circle'],
-					'icon'               => 'fa-bars',
-					],
-					];
+					foreach (\CMS::sectionTypes()->all() as $sectionTypes) 
+					{
+						$sections[$sectionTypes->section_type_name] = [
+						"All {$sectionTypes->section_type_name}" => ['url' => url('admin/content/sections/show', $sectionTypes->id), 'icon'       => 'fa-eye'],
+						"Add {$sectionTypes->section_type_name}"  => ['url' => url('admin/content/sections/create', $sectionTypes->id), 'icon' => 'fa-plus-circle'],
+						'icon'               => 'fa-bars',
+						];
+					}
+					foreach (\CMS::contentTypes()->getAllContentTypes() as $contentType) 
+					{
+						$contents[$contentType->content_type_name] = [
+						"All {$contentType->content_type_name}" => ['url' => url('admin/content/show', $contentType->id), 'icon'       => 'fa-eye'],
+						"Add {$contentType->content_type_name}"  => ['url' => url('admin/content/create', $contentType->id), 'icon' => 'fa-plus-circle'],
+						'icon'               => 'fa-bars',
+						];
+					}
+					$sidebar[] = array_merge([
+						'Tags'     => [
+						'All Tags' => ['url' => url('admin/content/tags/'), 'icon'       => 'fa-eye'],
+						'Add Tag'  => ['url' => url('admin/content/tags/create'), 'icon' => 'fa-plus-circle'],
+						'icon'     => 'fa-tags',
+						]
+					],$sections, $contents);
 				}
 				elseif ($module['slug'] == 'gallery') 
 				{
@@ -108,6 +114,33 @@ class Initialize {
 					'All Comments' => ['url' => url('admin/comment/'), 'icon' => 'fa-comments'],
 					'icon'          => 'fa fa-comments',
 					]
+					];
+				}
+				elseif ($module['slug'] == 'menus') 
+				{
+					$sidebar[] = [
+						'Menus'  => [
+						'All Menus'     => ['url' => url('admin/menus'), 'icon'       => 'fa-eye'],
+						'icon'          => 'fa fa-link',
+					]
+					];
+				}
+				elseif ($module['slug'] == 'widget') 
+				{
+					$sidebar[] = [
+					'Widgets' => [
+					'All Widgets' => ['url' => url('admin/widget/widgettypes/'), 'icon'       => 'fa-eye'],
+					'icon'              => 'fa-pencil-square',
+					],
+					];
+				}
+				elseif ($module['slug'] == 'slider') 
+				{
+					$sidebar[] = [
+					'Sliders' => [
+					'All Sliders' => ['url' => url('admin/slider/'), 'icon'       => 'fa-eye'],
+					'icon'        => 'fa-pencil-square',
+					],
 					];
 				}
 			}
