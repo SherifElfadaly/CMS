@@ -14,3 +14,12 @@
 Route::get('/admin', ['middleware' => 'AclAuthenticate', function(){
     return view('home');
 }]);
+
+Route::get('/admin/changeLanguage/{key}', function($key){
+	if($key)
+	{
+		\Session::put('language', $key);
+		\Lang::setlocale($key);
+	}
+	return redirect()->back();
+});

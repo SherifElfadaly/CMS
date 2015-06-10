@@ -69,6 +69,9 @@ class Initialize {
 				}
 				elseif ($module['slug'] == 'content') 
 				{
+					
+					$contents = [];
+					$sections = [];
 					foreach (\CMS::sectionTypes()->all() as $sectionTypes) 
 					{
 						$sections[$sectionTypes->section_type_name] = [
