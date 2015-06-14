@@ -10,7 +10,8 @@ class PagesController extends Controller {
 	 */
 	public function showPage($page = 'home')
 	{
-		$page = \CMS::pages()->first('page_slug', $page);
-		return view('crevisoft::' . $page->template, compact('page'));
+		$page  = \CMS::pages()->first('page_slug', $page);
+		$theme = \CMS::coreModules()->getActiveTheme()->module_key;
+		return view($theme . '::' . $page->template, compact('page'));
 	}
 }
