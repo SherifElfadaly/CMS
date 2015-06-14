@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/{page?}', 'PagesController@showPage');
+
 Route::get('/admin', ['middleware' => 'AclAuthenticate', function(){
     return view('home');
 }]);

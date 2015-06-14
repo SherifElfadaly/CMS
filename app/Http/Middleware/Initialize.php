@@ -146,6 +146,15 @@ class Initialize {
 					],
 					];
 				}
+				elseif ($module['slug'] == 'pages') 
+				{
+					$sidebar[] = [
+					'Pages' => [
+					'All Pages' => ['url' => url('admin/pages/'), 'icon'       => 'fa-eye'],
+					'icon'        => 'fa-pencil-square',
+					],
+					];
+				}
 			}
 
 			$categories = \CMS::sections()->getSectionTree();
