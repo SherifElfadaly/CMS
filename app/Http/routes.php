@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/{page?}', 'PagesController@showPage');
-
 Route::get('/admin', ['middleware' => 'AclAuthenticate', function(){
     return view('home');
 }]);
@@ -25,3 +23,5 @@ Route::get('/admin/changeLanguage/{key}', function($key){
 	}
 	return redirect()->back();
 });
+
+Route::get('/{page?}', 'PagesController@showPage');

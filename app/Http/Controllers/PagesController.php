@@ -12,6 +12,9 @@ class PagesController extends Controller {
 	{
 		$page  = \CMS::pages()->first('page_slug', $page);
 		$theme = \CMS::coreModules()->getActiveTheme()->module_key;
+
+		if ( ! $page || ! view()->exists($theme . '::' . $page->template)) abort(404);
+
 		return view($theme . '::' . $page->template, compact('page'));
 	}
 }
