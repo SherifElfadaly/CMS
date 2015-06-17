@@ -22,6 +22,7 @@ class CMS extends AbstractRepositoryContainer
 		'App\Modules\Widget\Repositories',
 		'App\Modules\Slider\Repositories',
 		'App\Modules\Pages\Repositories',
+		'App\Modules\Seo\Repositories',
 				];
 	}
 }
