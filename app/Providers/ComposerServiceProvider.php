@@ -14,11 +14,6 @@ class ComposerServiceProvider extends ServiceProvider {
     {
         View::composer('*', function()
         {
-            if (\Auth::check()) 
-            {
-                $isAdmin = \CMS::users()->userHasGroup(\Auth::user()->id, 'admin');
-                view()->share('isAdmin', $isAdmin);
-            }
         });
     }
 

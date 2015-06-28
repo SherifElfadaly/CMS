@@ -196,7 +196,7 @@ return [
 		'Validator'              => 'Illuminate\Support\Facades\Validator',
 		'View'                   => 'Illuminate\Support\Facades\View',
 		'Module'                 => 'Caffeinated\Modules\Facades\Module',
-		'CMS'                    => 'App\Facades\CMS',
+		'CMS'                    => 'App\Modules\Core\Facades\CMS',
 		'Socialize'              => 'Laravel\Socialite\Facades\Socialite',
 		'Image'                  => 'Intervention\Image\Facades\Image',
 

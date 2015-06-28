@@ -10,18 +10,3 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/admin', ['middleware' => 'AclAuthenticate', function(){
-    return view('home');
-}]);
-
-Route::get('/admin/changeLanguage/{key}', function($key){
-	if($key)
-	{
-		\Session::put('language', $key);
-		\Lang::setlocale($key);
-	}
-	return redirect()->back();
-});
-
-Route::get('/{page?}', 'PagesController@showPage');

@@ -41,7 +41,7 @@ class Handler extends ExceptionHandler {
 		if ($e->getMessage() == "Unauthorized") 
 		{
 			$message = 'You don\'t have permissions.';
-			return response()->view('errors.error', compact('message'));
+			return response()->view('core::error', compact('message'));
 		}
 		elseif($e instanceof \PDOException)
 		{
@@ -74,7 +74,7 @@ class Handler extends ExceptionHandler {
 		else
 		{
 			$message = 'Something went wrong.';
-			return response()->view('errors.error', compact('message'));
+			return response()->view('core::error', compact('message'));
 		}
 	}
 
